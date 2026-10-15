@@ -4,15 +4,23 @@ import numpy as np
 import tensorflow as tf
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEFAULT_MODEL_PATH = os.path.join(BASE_DIR, "Model", "bigru_goemotions_model.keras")
-DEFAULT_ARTIFACTS_PATH = os.path.join(BASE_DIR, "Model", "model_artifacts.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "Model", "bigru_goemotions_model.keras")
+ARTIFACTS_PATH = os.path.join(BASE_DIR, "Model", "model_artifacts.pkl")
+
 
 class EmotionPredictor:
     def __init__(
         self,
-        model_path: str = DEFAULT_MODEL_PATH,
-        artifacts_path: str = DEFAULT_ARTIFACTS_PATH,
+        model_path: str = None,
+        artifacts_path: str = None,
     ):
+        # Path dynamically override
+        if model_path is None or "D:" in model_path:
+            model_path = MODEL_PATH
+
+        if artifacts_path is None or "D:" in artifacts_path:
+            artifacts_path = ARTIFACTS_PATH
+
         self.model = tf.keras.models.load_model(model_path)
         with open(artifacts_path, "rb") as f:
             artifacts = pickle.load(f)
