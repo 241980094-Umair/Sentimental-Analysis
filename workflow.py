@@ -3,10 +3,9 @@ import pickle
 import numpy as np
 import tensorflow as tf
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "Model", "bigru_goemotions_model.keras")
 ARTIFACTS_PATH = os.path.join(BASE_DIR, "Model", "model_artifacts.pkl")
-
 
 class EmotionPredictor:
     def __init__(
