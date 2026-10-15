@@ -1,11 +1,17 @@
+import os
 import pickle
 import numpy as np
 import tensorflow as tf
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_MODEL_PATH = os.path.join(BASE_DIR, "Model", "bigru_goemotions_model.keras")
+DEFAULT_ARTIFACTS_PATH = os.path.join(BASE_DIR, "Model", "model_artifacts.pkl")
+
 class EmotionPredictor:
     def __init__(
         self,
-        model_path: str = r"D:\Sentimental Analysis\Model\bigru_goemotions_model.keras",
-        artifacts_path: str = r"D:\Sentimental Analysis\Model\model_artifacts.pkl",
+        model_path: str = DEFAULT_MODEL_PATH,
+        artifacts_path: str = DEFAULT_ARTIFACTS_PATH,
     ):
         self.model = tf.keras.models.load_model(model_path)
         with open(artifacts_path, "rb") as f:
